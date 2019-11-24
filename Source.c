@@ -7,9 +7,9 @@ int TypeSeek(char* p);
 int main()
 {
 	setlocale(LC_ALL, "RUS");
-	int identCount = 0; // счётчик идентификаторов
+	int identCount = 0; // СЃС‡С‘С‚С‡РёРє РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ
 	int i = 0;
-	char buf[256]; // буфер для чтения
+	char buf[256]; // Р±СѓС„РµСЂ РґР»СЏ С‡С‚РµРЅРёСЏ
 
 	FILE* in;
 
@@ -24,15 +24,15 @@ int main()
 	
 	while (fgets(buf, 256, in) != NULL) 
 	{
-		identCount += Identificator(buf); // добавление идентификаторов из текущей строки
+		identCount += Identificator(buf); // РґРѕР±Р°РІР»РµРЅРёРµ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РёР· С‚РµРєСѓС‰РµР№ СЃС‚СЂРѕРєРё
 		
-		for (i = 0; i < 256; ++i) // очистка буфера
+		for (i = 0; i < 256; ++i) // РѕС‡РёСЃС‚РєР° Р±СѓС„РµСЂР°
 			buf[i] = '\0';
 		
 	}
 
 	
-	printf("\n\nКол-во идентификаторов в программе: %d", identCount);
+	printf("\n\nРљРѕР»-РІРѕ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РІ РїСЂРѕРіСЂР°РјРјРµ: %d", identCount);
 	fclose(in);
 
 
@@ -49,24 +49,24 @@ int Identificator(char* inputString)
 	int i = 0;
 	int s = 0;
 	int identCount = 0;
-	while (inputString[i] != '\0' && inputString[i] != '\n') // пока не конец строки
+	while (inputString[i] != '\0' && inputString[i] != '\n') // РїРѕРєР° РЅРµ РєРѕРЅРµС† СЃС‚СЂРѕРєРё
 	{
-		while (!isspace(inputString[i]) && inputString[i] != '\0' && !ispunct(inputString[i])) // внести в промежуточную строку все буквы и цифры посимвольно
+		while (!isspace(inputString[i]) && inputString[i] != '\0' && !ispunct(inputString[i])) // РІРЅРµСЃС‚Рё РІ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅСѓСЋ СЃС‚СЂРѕРєСѓ РІСЃРµ Р±СѓРєРІС‹ Рё С†РёС„СЂС‹ РїРѕСЃРёРјРІРѕР»СЊРЅРѕ
 		{
 			p[s] = inputString[i];
 			s++;
 			i++;
 		}
-		if (inputString[i] == '/' && inputString[i + 1] == '/') // если мы внутри комментария
+		if (inputString[i] == '/' && inputString[i + 1] == '/') // РµСЃР»Рё РјС‹ РІРЅСѓС‚СЂРё РєРѕРјРјРµРЅС‚Р°СЂРёСЏ
 			break;
-		if (TypeSeek(p)) // если найден указатель типа 
+		if (TypeSeek(p)) // РµСЃР»Рё РЅР°Р№РґРµРЅ СѓРєР°Р·Р°С‚РµР»СЊ С‚РёРїР° 
 		{
 			typeFlag = 1; 
 		}
 		else
 		{
 			for (int j = 0; j < s; j++)
-				if (typeFlag && (isalpha(p[j]) || p[j] == '_')) // если указатель типа найден и после него нижнее подчерк. или буква
+				if (typeFlag && (isalpha(p[j]) || p[j] == '_')) // РµСЃР»Рё СѓРєР°Р·Р°С‚РµР»СЊ С‚РёРїР° РЅР°Р№РґРµРЅ Рё РїРѕСЃР»Рµ РЅРµРіРѕ РЅРёР¶РЅРµРµ РїРѕРґС‡РµСЂРє. РёР»Рё Р±СѓРєРІР°
 					f = 1; 
 				else f = 0;
 		}
@@ -74,7 +74,7 @@ int Identificator(char* inputString)
 		{
 			identCount++;
 			printf("%s\n", p);
-			if (inputString[i] == '(')   // мы внутри скобок, где идентификаторов не может быть
+			if (inputString[i] == '(')   // РјС‹ РІРЅСѓС‚СЂРё СЃРєРѕР±РѕРє, РіРґРµ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ
 			{
 				i++;
 				while (inputString[i] != ')')
@@ -83,7 +83,7 @@ int Identificator(char* inputString)
 		}
 		if (inputString[i] == ';')
 			typeFlag = 0;
-		for (int j = 0; j < 32; j++) // очистка 
+		for (int j = 0; j < 32; j++) // РѕС‡РёСЃС‚РєР° 
 			p[j] = '\0';
 		s = 0;
 		i++;
@@ -92,7 +92,7 @@ int Identificator(char* inputString)
 	return identCount;
 }
 
-int TypeSeek(char* p) // находим тип данных(характерный признак идентификатора)
+int TypeSeek(char* p) // РЅР°С…РѕРґРёРј С‚РёРї РґР°РЅРЅС‹С…(С…Р°СЂР°РєС‚РµСЂРЅС‹Р№ РїСЂРёР·РЅР°Рє РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂР°)
 {
 	if (strcmp(p, "long") == 0) return 1;
 	else if (strcmp(p, "void") == 0) return 1;
